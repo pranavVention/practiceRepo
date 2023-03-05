@@ -1,4 +1,4 @@
-# Docker container
+# Docker container - Beginners guide
 This repository provides an example of how to create a Docker image and run a Docker container. The repository contains a Dockerfile, a shell script to build the Docker image, and a shell script to run the Docker container.
 
 
@@ -7,6 +7,18 @@ This repository provides an example of how to create a Docker image and run a Do
 Docker is a platform for building, shipping, and running applications in containers. Containers are lightweight, portable, and self-sufficient, making them an ideal choice for running applications in a variety of environments.
 
 This repository provides an example of how to use Docker to build and run a containerized application.
+
+
+## Prerequisites
+
+- Have Docker installed on your machine.
+- Have a GitHub account.
+- Have permission to pull and push images to a GitHub Packages container registry.
+- Have a personal access token (PAT) generted from GitHub and saved in `TOKEN.txt`
+- Perform Docker Login to authentication credentials to access and push Docker images to the GitHub Packages registry.
+``` 
+cat ./TOKEN.txt | docker login https://docker.pkg.github.com -u USERNAME --password-stdin
+```
 
 ## Description of Files:
 -  **Dockerfile :** Instructions required to build a docker image from a base image.
@@ -22,9 +34,13 @@ This repository provides an example of how to use Docker to build and run a cont
 - **build-image-local.sh :**: This shell script automates the process of building a Docker image from a Dockerfile. The script uses the **`docker build`** command to build the Docker image and provides additional configuration options. For example, you can specify a GitHub access token to download private dependencies during the build process.
 
 - **run-container.sh :** This shell script automates the process of running a Docker container from a Docker image. The script uses the **`docker run`** command to run the Docker container and provides additional configuration options. For example, you can specify the name of the container and the command to run inside the container.
+- **push-image-remote.sh**:
+This shell script automates the process of pushing a Docker image to a remote Docker registry. The script uses the **`docker tag`** command to apply a custom tag to the image so that it can be easily referenced by its new name. It then uses the **`docker push`** command to upload the Docker image to the specified registry. This script is useful when you want to share a Docker image with others or deploy it to a remote environment.
+
+- **pull-image-remote.sh**: This shell script automates the process of pulling a Docker image from a remote Docker registry. The script uses the **`docker pull`** command to download the Docker image from the specified registry. It then uses the **`docker tag`** command to apply a custom tag to the image so that it can be easily referenced by its new name. This script is useful when you want to use a Docker image that has been uploaded to a remote registry, such as Docker Hub or GitHub Container Registry [](ghcr.io) .
 
 ## Examples
-To build the docker image
+**To build the docker image**
 
 ``` 
 ./build-image-local.sh
@@ -32,14 +48,31 @@ To build the docker image
 
 This will build the Docker image using the instructions in the Dockerfile and any additional configuration options specified in `build-image-local.sh`.
 
-To run the Docker container:
+**To run the Docker container:**
 
 ```
 ./run-container.sh
 ```
 This will run the Docker container using the Docker image created by `build-image-local.sh` and any additional configuration options specified in `run-container.sh`.
 
+
+**To push the Docker image to a remote repository:**
+
+```
+./push-image-remote.sh
+```
+
+This will push the Docker image to a remote repository using the `docker push` command. The image will be tagged with the name of the remote repository and the `:latest` tag.
+
+**To pull the Docker image from a remote repository:**
+
+```
+./pull-image-remote.sh
+```
+This will pull the Docker image from a remote repository using the `docker pull` command and tag the image using the `docker tag `command.
+
 ---
+
 
 ## Common Docker Commands
 
