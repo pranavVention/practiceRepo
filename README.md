@@ -1,102 +1,61 @@
-# Python Project Deployment - Beginner's guide
-It is a good practice to install Python dependencies in a virtual environment. This helps to keep your system clean and organized. This guide will help you create a virtual environment and install Python dependencies in it.
+# Python Package Creatin - Beginner's guide
 
-# Create a virtual environment (called .venv)
-You can create a virtual environment by following these instructions:
-#### macOS/Linux
-```bash
-python3 -m venv .venv
-```
-#### Windows
-```bash
-python -m venv .venv
-```
+This readme explains how to create python package from a python module.
 
-## Activate the virtual environment
-```bash
-source .venv/bin/activate
-```
+What python module looks like
+------------------------------
 
-# Creating python dependencies file
-To install a package :
-```
-pip install <package-name>
-```
+Python module is a directory with `__init__.py` file in it. The `__init__.py` file can be empty or can contain some code. The code in `__init__.py` is executed when the module is imported.
 
-To save python dependencies in requirements.txt
-```bash
-pip freeze > requirements.txt
-```
-### Downloading Dependencies for Offline Installation
-If you need to install packages on a machine without an internet connection, you can download them on a machine with internet access using the following command:
-```bash
-pip download -r requirements.txt -d packages --python-version 3.7.0 --only-binary=:all: 
-```
-Note: Make sure that the package version specified in ```requirements.txt``` is available for the Python version specified with ```--python-version```.
-
-If a package is not available as a pre-built binary package, you may see the following error message:
-
-    ERROR: Could not find a version that satisfies the requirement <package-name>==<version> (from versions: none)
-    ERROR: No matching distribution found for <package-name>==<version>
+example:
+    
+    ```
+    parent_folder/
+        my_module/
+            __init__.py
+            my_module.py
+    ```
 
 
-To download the source distribution of the package, run:
-```
-cd packages
-pip download <package-name>==<version>
-``` 
 
-# Installing python dependencies
-#### Create a new .venv and activate
-```bash 
-python -m venv .venv
-source .venv/bin/activate
-```
-To install Python dependencies from the internet, run the following command:
-```bash
-pip install -r requirements.txt
-```
+How to create python package using poetry
+----------------------------
 
-If you don't have an internet connection, you can copy the ```packages``` folder and run the following command:
-```bash
-pip install --no-index --find-links=packages -r requirements.txt
-```
+1. Install poetry using 
+    ```bash
+    pip install poetry
+    ```
 
-To install other packages that are present as source distribution in ```.tar.gz``` format, run the following command:
-```bash
-# Example : install paho-mqtt from the tar.gz file
-pip install ./packages/paho-mqtt-1.6.1.tar.gz 
-```
+2. Navigate to the directory containing the module (`parent_folder`).
+
+3. Run 
+    ```bash
+    poetry init
+    ``` 
+This will create `pyproject.toml` file in the `parent_folder`.
+
+4. Create `README.md` file in the same directory as `pyproject.toml` file.
+
+5. Build the package by running
+    ```bash
+    poetry build
+    ```
+    This will create `dist` directory containing the package.
 
 
-## To install everything from a bash file:
 
-1. Place the ```packages``` folder and ```requirements.txt``` file in the same directory.
 
-2. In that directory, create ```setup.sh``` file with the following content:
-```bash
-#!/bin/bash
 
-# create virtual environment
-python -m venv .venv
 
-# activate virtual environment
-source .venv/bin/activate
+How to use the package
+----------------------
 
-# install packages from local directory
-pip install --no-index --find-links=packages -r requirements.txt
+1. Install the package using
 
-# iExample : install paho-mqtt from the tar.gz file
-pip install ./packages/paho-mqtt-1.6.1.tar.gz
-```
+    ```bash
+    pip install <path_to_package>/dist/<package_name>-<version>.tar.gz
+    ```
+2. Use the package.
 
-3. Make it an executable file
-```bash
-chmod +x setup.sh
-```
 
-4. Run the bash file
-```bash
-./setup.sh
-```
 
