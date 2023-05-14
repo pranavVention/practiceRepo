@@ -24,6 +24,11 @@ RUN rosdep update
 # source global ros
 RUN /bin/zsh -c "source /opt/ros/$ROS_DISTRO/setup.zsh"
 
+#Autocomple for ROS2 and colcon
+RUN echo 'eval "$(register-python-argcomplete3 ros2)"' >> /root/.zshrc
+RUN echo 'eval "$(register-python-argcomplete3 colcon)"' >> /root/.zshrc
+
+
 #Git PAT to clone private repos
 ARG GIT_PAT
 #Clone git repo and pass PAT
