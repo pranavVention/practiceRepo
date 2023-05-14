@@ -22,7 +22,7 @@ RUN apt install vim -y\
 RUN rosdep update
 
 # source global ros
-RUN /bin/zsh -c "source /opt/ros/$ROS_DISTRO/setup.zsh"
+RUN echo 'source /opt/ros/$ROS_DISTRO/setup.zsh' >> /root/.zshrc
 
 #Autocomple for ROS2 and colcon
 RUN echo 'eval "$(register-python-argcomplete3 ros2)"' >> /root/.zshrc
