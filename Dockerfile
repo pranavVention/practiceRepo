@@ -1,6 +1,8 @@
 FROM osrf/ros:humble-desktop as humble-base-image
 
-WORKDIR /home
+# WORKDIR /home
+# go to workspace
+WORKDIR /root/workspace
 
 RUN apt update
 
