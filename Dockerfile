@@ -1,5 +1,5 @@
-FROM osrf/ros:humble-desktop as humble-base-image
-
+# https://varhowto.com/install-ros-noetic-docker/
+FROM osrf/ros:noetic-desktop-full as neotic-base-image
 # WORKDIR /home
 # go to workspace
 WORKDIR /root/workspace
@@ -25,8 +25,8 @@ RUN rosdep update
 RUN echo 'source /opt/ros/$ROS_DISTRO/setup.zsh' >> /root/.zshrc
 
 #Autocomple for ROS2 and colcon
-RUN echo 'eval "$(register-python-argcomplete3 ros2)"' >> /root/.zshrc
-RUN echo 'eval "$(register-python-argcomplete3 colcon)"' >> /root/.zshrc
+#RUN echo 'eval "$(register-python-argcomplete3 ros2)"' >> /root/.zshrc
+
 
 
 #Git PAT to clone private repos

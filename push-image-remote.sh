@@ -1,2 +1,2 @@
-docker tag ros2-humble-image  ghcr.io/pranavvention/practicegit/ros2-humble-image
-docker push ghcr.io/pranavvention/practicegit/ros2-humble-image:latest
+docker tag ros-noetic-image  ghcr.io/pranavvention/practicegit/ros-noetic-image
+docker push ghcr.io/pranavvention/practicegit/ros-noetic-image:latest

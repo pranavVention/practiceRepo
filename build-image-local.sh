@@ -6,6 +6,6 @@ if [[ "" == "$PAT" ]]; then
 fi
 
 echo "Building image from Dockerfile..."
-docker build --no-cache . --build-arg GIT_PAT=$PAT -t ros2-humble-image 
+docker build --no-cache . --build-arg GIT_PAT=$PAT -t ros-noetic-image 
 
 
