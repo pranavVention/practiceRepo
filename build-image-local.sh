@@ -15,9 +15,12 @@ docker build --no-cache . --build-arg GIT_PAT="$PAT" -t "$BASE_IMAGE" || { echo 
 echo "Second DOCKER Build"
 docker build --no-cache . --file Linux.Dockerfile --build-arg GIT_PAT="$PAT" -t "$BUILT_IMAGE" || { echo "Error: Docker build failed"; exit 1; }
 
-echo "Remove dangling images"
-docker rmi -f $(docker images -f "dangling=true" -q) || { echo "Error: Docker build failed"; exit 1; }
 
+DANGLING_IMAGES=$(docker images -f "dangling=true" -q)
+if [[ -n "$DANGLING_IMAGES" ]]; then
+	echo "Remove dangling images"
+    docker rmi -f $DANGLING_IMAGES || { echo "Error: Failed to remove dangling images"; exit 1; }
+fi
 echo "Remove $BASE_IMAGE"
 docker rmi -f "$BASE_IMAGE" || { echo "Error: Failed to remove $BASE_IMAGE"; exit 1; }
 

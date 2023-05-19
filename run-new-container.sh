@@ -18,5 +18,5 @@ docker  run -it \
         --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
         --env=NVIDIA_VISIBLE_DEVICES=all \
         --env=NVIDIA_DRIVER_CAPABILITIES=all \
-        ros-noetic-image\
+        ros-noetic-image-built\
         zsh
