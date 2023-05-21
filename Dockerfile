@@ -25,7 +25,10 @@ RUN apt update \
   && apt install -y zsh \
   && apt install -y wget \
   && sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.1/zsh-in-docker.sh)" -- \
-  -t robbyrussell
+  -t robbyrussell \
+  && apt install gedit -y\
+  && apt install meld -y
+
 
 # Cleanup
 RUN apt clean \ 
@@ -38,9 +41,8 @@ RUN apt clean \
 RUN rosdep update
 
 # source global ros
-# RUN echo 'source /opt/ros/$ROS_DISTRO/setup.zsh' >> /root/.zshrc
-ENTRYPOINT ["zsh", "-c", "source /opt/ros/$ROS_DISTRO/setup.zsh && exec zsh"]
-
+# ENTRYPOINT ["zsh", "-c", "source /opt/ros/$ROS_DISTRO/setup.zsh && exec zsh"]
+RUN echo 'source /opt/ros/$ROS_DISTRO/setup.zsh' >> /root/.zshrc
 
 #Git PAT to clone private repos
 ARG GIT_PAT
